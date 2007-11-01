@@ -1,0 +1,13 @@
+===========
+ivtvfe 0.10
+===========
+
+ivtvfe is a frontend for ivtv-tune. The purpose is to automatically scan for
+channels, and to easily switch between these.
+
+This is not a highly sophisticated piece of software in any way - but it makes
+life simpler for people who zap manually between channels.
+
+Feel free to send me feedback!
+
+-- Trygve Vea <trygve.vea@gmail.com>

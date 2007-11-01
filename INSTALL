@@ -1,0 +1,16 @@
+This software is a frontend for ivtv-tune, therefore it depends on ivtv-tune
+to work. In Debian (which happens to be the distribution I develop and test
+on), you can get this by installing the package "ivtv-utils".
+
+For the scripts to work, you will also need the UI::Dialog-perl module, and
+zenity. In Debian, this is as simple as installing the packages 
+"libui-dialog-perl" and "zenity".
+
+To install the perl-scripts, you run the following as root:
+
+    make install
+
+If further assistance is needed, you may try to send me an email, and I will
+answer if I can.
+
+    -- Trygve Vea <trygve.vea@gmail.com>

@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+#
+# ivtvfe - ivtv-tune frontend
+# Copyright (C) 2007 Trygve Vea <trygve.vea@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+use strict;
+use warnings;
+use UI::Dialog::Backend::Zenity;
+
+my @channels;
+push @channels, 0;
+push @channels, "EXIT";
+
+unless (-e "$ENV{HOME}/.ivtvfe/channels") {
+    die("We don't have a channels-file!\n");
+}
+
+open FH, "< $ENV{HOME}/.ivtvfe/channels";
+
+for (<FH>) {
+    my @tmp;
+    @tmp = split(/\|/);
+    push @channels, $tmp[0];
+    chomp($tmp[1]);
+    push @channels, $tmp[1];
+}
+close FH;
+
+my $d = new UI::Dialog::Backend::Zenity(
+    backtitle=>'IVTV-Zapper',
+    title=>'IVTV-Zapper',
+    width=>150,
+    height=>500
+    );
+
+while (1) {
+    my $selection = $d->menu(text=>'Pick a channel!',list=>\@channels);
+
+    unless ( $selection > 0 ) {
+        exit;
+    }
+    system('ivtv-tune','-f',$selection);
+}
